@@ -73,8 +73,17 @@ class World:
 
 myWorld = World()        
 
+def send_all(msg):
+    for client in clients:
+        client.put( msg )
+
+def send_all_json(obj):
+    send_all( json.dumps(obj) )
+
 def set_listener( entity, data ):
     ''' do something with the update ! '''
+    dict = {entity : data}
+    send_all_json(dict)
 
 myWorld.add_set_listener( set_listener )
         
@@ -89,12 +98,15 @@ def read_ws(ws,client):
         while True:
             msg = ws.receive()
             print("Websocket received: ", msg)
-            if msg != None:
+            if msg is not None:
                 data = json.loads(msg)
                 for key, value in data.items():
                     myWorld.set(key, value)
+            else:
+                break
     except:
-        return None
+        """Done"""
+        print("done")
 
 @sockets.route('/subscribe')
 def subscribe_socket(ws):
@@ -103,7 +115,6 @@ def subscribe_socket(ws):
     client = Client()
     clients.append(client) # add client to list
     g = gevent.spawn(read_ws, ws, client) # create a new greenlet
-
     try:
         while True:
             msg = client.get()
@@ -113,8 +124,6 @@ def subscribe_socket(ws):
     finally:
         clients.remove(client) # remove client from list
         gevent.kill(g) # kill the greenlet
-
-    return None
 
 
 # I give this to you, this is how you get the raw body/data portion of a post in flask
