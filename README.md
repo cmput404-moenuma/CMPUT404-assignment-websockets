@@ -21,6 +21,7 @@ Contributors / Licensing
 ========================
 
 Generally everything is LICENSE'D under the Apache 2 license by Abram Hindle.
+sockets.py and static/index.html is LICENSE'D under the Apache 2 license by Moe Numasawa.
 
 freetests.py is LICENSE'D under a BSD-like license:
 
@@ -59,3 +60,8 @@ Contributors
 * Mark Galloway
 * Abram Hindle
 * Cole Mackenzie
+
+References
+============
+This assignment was completed by referring to the example codes on
+https://github.com/uofa-cmput404/cmput404-slides/blob/master/examples/WebSocketsExamples
