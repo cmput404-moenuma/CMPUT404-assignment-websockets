@@ -43,7 +43,7 @@ function debug(str) {
 debug("Test");
 
 world = {};
-
+drawBackground()
 //XXX: TODO Make this prettier!
 function drawCircle(context,entity) {
     with(context) {
@@ -80,11 +80,15 @@ function prepEntity(entity) {
     return entity;
 }
 
+function drawBackground() {
+    var img = new Image();
+    img.src = "amongus_background.jpg";
+    context.drawImage(img, 0,0,W,H)
+}
+
 function clearFrame() {
     with(context) {
-	moveTo(0,0);
-	fillStyle = "#000";
-	fillRect(0,0,W,H);
+	    drawBackground();
     }
 
 }
@@ -244,15 +248,15 @@ mouse = (function() {
 // Add the application specific mouse listeners!
 //XXX: TODO Make these prettier!
 mouse.mousedowners.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'blue','height':400,'width':400,'image':'shhhh.png'});
+    addEntityWithoutName({'x':x,'y':y,'height':100,'width':79,'image':'blue_amongus.png'});
 });
 
 mouse.mouseuppers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'red','height':100,'width':65,'image':'black_amongus.png'});
+    addEntityWithoutName({'x':x,'y':y,'height':100,'width':65,'image':'black_amongus.png'});
 });
 
 mouse.mousedraggers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'green','height':100,'width':100,'image':'amongus.png'});
+    addEntityWithoutName({'x':x,'y':y,'height':100,'width':100,'image':'amongus.png'});
 });
 
 
